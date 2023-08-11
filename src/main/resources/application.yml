@@ -1,0 +1,22 @@
+logging:
+  level:
+    com.champion: debug
+    org.springframework: info
+server:
+  port: 8086
+
+
+spring:
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/chicken?serverTimezone=UTC&useUnicode=true&characterEncoding=UTF-8
+    username: root
+    password: 1807102
+  thymeleaf:
+    view-names: echarts
+    cache: false # 开发时关闭缓存,不然没法看到实时页面
+
+
+mybatis:
+    mapper-locations: classpath:mapper/*.xml
+    type-aliases-package: com.example.chicken.rs.entity

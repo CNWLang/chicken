@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.chicken.rs.mapper.UserMapper">
+    <!-- 基础的 ResultMap -->
+    <resultMap id="BaseResultMap" type="com.example.chicken.rs.entity.User">
+        <result column="action_time" property="actionTime" />
+        <result column="actions" property="actions" />
+        <result column="address_city" property="addressCity" />
+        <result column="address_province" property="addressProvince" />
+        <result column="email" property="email" />
+        <result column="is_student" property="isStudent" />
+        <result column="online" property="online" />
+        <result column="password" property="password" />
+        <result column="reg_time" property="regTime" />
+        <result column="true_name" property="trueName" />
+        <result column="username" property="username" />
+    </resultMap>
+
+    <!-- 插入用户 -->
+    <insert id="insertUser" parameterType="com.example.chicken.rs.entity.User">
+        INSERT INTO users (action_time, actions, address_city, address_province, email, is_student, online, password, reg_time, true_name, username)
+        VALUES (#{actionTime}, #{actions}, #{addressCity}, #{addressProvince}, #{email}, #{isStudent}, #{online}, #{password}, #{regTime}, #{trueName}, #{username})
+    </insert>
+
+    <!-- 根据用户名查询用户 -->
+    <select id="findByUsername" resultMap="BaseResultMap">
+        SELECT * FROM users WHERE username = #{username}
+    </select>
+
+    <!-- 其他的 CRUD 操作，如 update, delete 等可以根据需要继续添加 -->
+</mapper>
