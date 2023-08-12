@@ -3,12 +3,26 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.example.chicken.rs.mapper.AdminMapper">
+    <!-- 基础的 ResultMap -->
+    <resultMap id="BaseResultMap" type="com.example.chicken.rs.entity.User">
+        <result column="action_time" property="actionTime" />
+        <result column="actions" property="actions" />
+        <result column="address_city" property="addressCity" />
+        <result column="address_province" property="addressProvince" />
+        <result column="email" property="email" />
+        <result column="is_student" property="student" />
+        <result column="online" property="online" />
+        <result column="password" property="password" />
+        <result column="reg_time" property="regTime" />
+        <result column="true_name" property="trueName" />
+        <result column="username" property="username" />
+    </resultMap>
 
     <!-- 定义查询语句 -->
-    <select id="findStudentList" resultType="com.example.chicken.rs.entity.User">
+    <select id="findStudentList" resultType="com.example.chicken.rs.entity.User" resultMap="BaseResultMap">
         SELECT *
         FROM users
-        WHERE is_student = 1
+        WHERE is_student = true
     </select>
 
 </mapper>

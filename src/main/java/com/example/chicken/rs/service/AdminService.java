@@ -8,12 +8,13 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Service
-public class AdminSerivce {
+public class AdminService {
     @Autowired
     private AdminMapper adminMapper;
 
     public List<User> findCustomerList(){
         List<User> result = adminMapper.findStudentList();
+        System.out.println(result);
         return result;
     }
 }

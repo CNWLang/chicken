@@ -5,10 +5,10 @@ import lombok.Data;
 @Data
 public class LoginResponse {
     private boolean success;
-    private boolean isStudent;
+    private boolean student;
 
-    public LoginResponse(boolean success, boolean isStudent) {
+    public LoginResponse(boolean success, boolean student) {
         this.success = success;
-        this.isStudent = isStudent;
+        this.student = student;
     }
 }

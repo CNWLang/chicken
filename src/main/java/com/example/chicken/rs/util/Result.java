@@ -1,55 +1,20 @@
 package com.example.chicken.rs.util;
 
-/**
- * 封装返回JSON数据的工具类
- * T是通用泛型
- * code 0是成功 -1是失败
- * @date: 2021/8/27 11:56
- */
+import lombok.Data;
+
+@Data
 public class Result<T> {
-    private int code;
+    private boolean code;
     private String message;
     private T data;
-
-    public int getCode() {
-        return code;
-    }
-
-    public void setCode(int code) {
-        this.code = code;
-    }
-
-    public String getMessage() {
-        return message;
-    }
-
-    public void setMessage(String message) {
-        this.message = message;
-    }
-
-    public T getData() {
-        return data;
-    }
-
-    public void setData(T data) {
-        this.data = data;
-    }
 
     public Result() {
     }
 
-    //封装静态方法  -- 成功！--无数据返回
-    public static <T> Result<T> success(String message){
-        Result<T> result = new Result<>();
-        result.setCode(0);
-        result.setMessage(message);
-        return result;
-    }
-
-    //封装静态方法  -- 成功！--有数据返回
+    //封装静态方法  -- 成功！
     public static <T> Result<T> success(T data, String message){
         Result<T> result = new Result<>();
-        result.setCode(0);
+        result.setCode(true);
         result.setData(data);
         result.setMessage(message);
         return result;
@@ -57,7 +22,7 @@ public class Result<T> {
     //封装静态方法  -- 失败
     public static <T> Result<T> error(String message){
         Result<T> result = new Result<>();
-        result.setCode(-1);
+        result.setCode(false);
         result.setMessage(message);
         return result;
     }

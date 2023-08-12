@@ -11,25 +11,17 @@ public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
-    private Long id;
+    private int id;
     private String actionTime;
     private int actions;
     private String addressCity;
     private String addressProvince;
     private String email;
-    private boolean isStudent;
+    private boolean student;
     private boolean online;
     private String password;
     private String regTime;
     private String trueName;
     private String username;
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
 
 }

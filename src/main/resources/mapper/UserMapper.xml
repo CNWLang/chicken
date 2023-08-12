@@ -9,7 +9,7 @@
         <result column="address_city" property="addressCity" />
         <result column="address_province" property="addressProvince" />
         <result column="email" property="email" />
-        <result column="is_student" property="isStudent" />
+        <result column="is_student" property="student" />
         <result column="online" property="online" />
         <result column="password" property="password" />
         <result column="reg_time" property="regTime" />
@@ -20,12 +20,12 @@
     <!-- 插入用户 -->
     <insert id="insertUser" parameterType="com.example.chicken.rs.entity.User">
         INSERT INTO users (action_time, actions, address_city, address_province, email, is_student, online, password, reg_time, true_name, username)
-        VALUES (#{actionTime}, #{actions}, #{addressCity}, #{addressProvince}, #{email}, #{isStudent}, #{online}, #{password}, #{regTime}, #{trueName}, #{username})
+        VALUES (#{actionTime}, #{actions}, #{addressCity}, #{addressProvince}, #{email}, #{student}, #{online}, #{password}, #{regTime}, #{trueName}, #{username})
     </insert>
 
     <!-- 根据用户名查询用户 -->
     <select id="findByUsername" resultMap="BaseResultMap">
-        SELECT * FROM users WHERE username = #{username}
+        SELECT * FROM users WHERE username = #{student}
     </select>
 
     <!-- 其他的 CRUD 操作，如 update, delete 等可以根据需要继续添加 -->
