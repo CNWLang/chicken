@@ -1,7 +1,7 @@
 package com.example.chicken.rs.controller;
 
-import com.example.chicken.rs.entity.LoginResponse;
-import com.example.chicken.rs.entity.RegisterResponse;
+import com.example.chicken.rs.util.LoginResponse;
+import com.example.chicken.rs.util.RegisterResponse;
 import com.example.chicken.rs.entity.User;
 import com.example.chicken.rs.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;

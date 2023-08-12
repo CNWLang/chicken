@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.chicken.rs.mapper.CourseMapper">
+
+
+    <!-- 定义查询语句 -->
+    <select id="findCourseList" resultType="com.example.chicken.rs.entity.Course">
+        SELECT *
+        FROM course
+        WHERE is_student = 1
+    </select>
+
+
+    <select id="findCourseListByState" resultType="com.example.chicken.rs.entity.Course">
+        SELECT * FROM courses WHERE Course_state = #{courseState}
+    </select>
+
+    <select id="getCourseById" resultType="com.example.chicken.rs.entity.Course">
+        SELECT * FROM courses WHERE id = #{courseId}
+    </select>
+
+
+    <update id="updateCourseStateAndStartDate">
+        UPDATE courses
+        SET Course_state = #{newState}, Start_Date = NOW()
+        WHERE Course_id = #{courseId}
+    </update>
+
+</mapper>

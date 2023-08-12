@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.example.chicken.rs.mapper.AdminMapper">
+
+    <!-- 定义查询语句 -->
+    <select id="findStudentList" resultType="com.example.chicken.rs.entity.User">
+        SELECT *
+        FROM users
+        WHERE is_student = 1
+    </select>
+
+</mapper>

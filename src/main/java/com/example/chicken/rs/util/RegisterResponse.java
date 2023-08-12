@@ -1,4 +1,4 @@
-package com.example.chicken.rs.entity;
+package com.example.chicken.rs.util;
 
 import lombok.Data;
 

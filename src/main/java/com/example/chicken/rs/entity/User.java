@@ -1,12 +1,17 @@
 package com.example.chicken.rs.entity;
 
+import jakarta.persistence.*;
 import lombok.Data;
 
 import java.time.LocalDateTime;
 
 @Data
+@Entity
 public class User {
-    int id;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id", nullable = false)
+    private Long id;
     private String actionTime;
     private int actions;
     private String addressCity;
@@ -18,5 +23,13 @@ public class User {
     private String regTime;
     private String trueName;
     private String username;
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
 
 }

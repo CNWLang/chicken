@@ -3,7 +3,7 @@ logging:
     com.champion: debug
     org.springframework: info
 server:
-  port: 8086
+  port: 8080
 
 
 spring:
