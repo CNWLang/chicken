@@ -28,5 +28,9 @@
         SELECT * FROM users WHERE username = #{student}
     </select>
 
+    <!-- 根据邮箱反转online状态  -->
+    <select id="reverseEmail" resultMap="BaseResultMap">
+        UPDATE users set online = 1 - online WHERE email = #{email}
+    </select>
     <!-- 其他的 CRUD 操作，如 update, delete 等可以根据需要继续添加 -->
 </mapper>

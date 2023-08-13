@@ -19,13 +19,10 @@ public class CourseController {
 
     @GetMapping("/findCourseList")
     public Result CourseList() {
-
         List<Course> CourseList = CourseService.findCourseList();
-        //分页对象
         PageInfo pageInfo = new PageInfo(CourseList);
         return Result.success(pageInfo, "成功查询");
     }
-
 
     @GetMapping("/Courses")
     public List<Course> getCourses(@RequestParam int CourseState) {

@@ -23,11 +23,27 @@ public class UserService {
     public boolean register(User user) {
         try {
             int affectedRows = userMapper.insertUser(user);
-            //System.out.println("-------------------------------------------------");
             return affectedRows>0;
         }catch (Exception ex){
             return false;
         }
-
     }
+
+    public User selectUserByUsername(String username){
+        User u = userMapper.findByUsername(username);
+        if(u!= null){
+            return u;
+        }
+        return null;
+    }
+
+    public  boolean reverseOnline(String email){
+        try {
+            int affectedRows = userMapper.reverseEmail(email);
+            return affectedRows>0;
+        }catch (Exception ex){
+            return false;
+        }
+    }
+
 }

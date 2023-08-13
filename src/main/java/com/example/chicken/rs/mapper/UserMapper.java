@@ -6,7 +6,6 @@ import org.apache.ibatis.annotations.Mapper;
 @Mapper
 public interface UserMapper {
     User findByUsername(String username);
-    void register(User user);
-
+    int reverseEmail(String email);
     int insertUser(User user);
 }

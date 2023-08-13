@@ -1,0 +1,13 @@
+{
+  "outPath": "./src/main/resources/doc/api",
+  "serverUrl": "http://localhost:8080",
+  "serverEnv": "http://{{server}}",
+  "dataDictionaries": [
+    {
+      "title": "响应码字典",
+      "enumClassName": "com.my0727.mouldquotationspring.common.ResultCodeEnum",
+      "codeField": "code",
+      "descField": "msg"
+    }
+  ]
+}
