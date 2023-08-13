@@ -18,12 +18,12 @@ public class UserController {
     //登陆
     @PostMapping("/login")
     public ResponseEntity<LoginResponse> login(@RequestBody User user) {
-        //System.out.println(user);
         User loggedInUser = userService.login(user.getUsername(), user.getPassword());
         if (loggedInUser != null) {
             return ResponseEntity.ok(new LoginResponse(true,loggedInUser.isStudent()));
+        }else {
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(new LoginResponse(false,false));
         }
-        return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(new LoginResponse(false,false));
     }
 
     //注册
@@ -36,20 +36,21 @@ public class UserController {
         }
     }
 
-    //检验用户是否已经被注册
+    //检验用户名是否已经被注册
     @GetMapping("/examine")
-    public boolean isExist(@RequestParam String username){
-        User user = userService.selectUserByUsername(username);
+    public boolean examine(@RequestParam String username){
+        User user = userService.examine(username);
         if(user!=null){
             return true;
+        }else {
+            return false;
         }
-        return false;
     }
 
     //反转在线状态
     @GetMapping("/re-online")
-    public boolean reverseOnline(@RequestBody User user){
-        if(userService.reverseOnline(user.getEmail())){
+    public boolean reverseOnline(@RequestParam String email){
+        if(userService.reverseOnline(email)){
             return true;
         }
         return false;

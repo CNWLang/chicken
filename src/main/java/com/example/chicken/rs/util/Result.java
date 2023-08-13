@@ -11,7 +11,7 @@ public class Result<T> {
     public Result() {
     }
 
-    //封装静态方法  -- 成功！
+    //封装静态方法  -- 成功
     public static <T> Result<T> success(T data, String message){
         Result<T> result = new Result<>();
         result.setCode(true);
@@ -19,6 +19,7 @@ public class Result<T> {
         result.setMessage(message);
         return result;
     }
+
     //封装静态方法  -- 失败
     public static <T> Result<T> error(String message){
         Result<T> result = new Result<>();
