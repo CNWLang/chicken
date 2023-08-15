@@ -2,29 +2,31 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.example.chicken.rs.mapper.CourseMapper">
+    <resultMap id="CourseResultMap" type="com.example.chicken.rs.entity.Course">
+        <id property="id" column="id"/>
+        <result property="course_no" column="course_no"/>
+        <result property="start_date" column="start_date"/>
+        <result property="end_date" column="end_date"/>
+        <result property="course_state" column="course_state"/>
+        <result property="course_money" column="course_money"/>
+        <result property="course_teacher_phone" column="course_teacher_phone"/>
+        <result property="course_teacher" column="course_teacher"/>
+    </resultMap>
 
-
-    <!-- 定义查询语句 -->
+    <!-- 查询课程列表 -->
     <select id="findCourseList" resultType="com.example.chicken.rs.entity.Course">
         SELECT *
         FROM course
-        WHERE is_student = 1
+    </select>
+
+    <!-- 根据课程id集合查询对应课程详情 -->
+    <select id="findCoursesByIds" resultType="com.example.chicken.rs.entity.Course">
+        SELECT * FROM course WHERE id IN
+        <foreach item="courseId" index="index" collection="course_id" open="(" separator="," close=")">
+            #{courseId}
+        </foreach>
     </select>
 
 
-    <select id="findCourseListByState" resultType="com.example.chicken.rs.entity.Course">
-        SELECT * FROM courses WHERE Course_state = #{courseState}
-    </select>
-
-    <select id="getCourseById" resultType="com.example.chicken.rs.entity.Course">
-        SELECT * FROM courses WHERE id = #{courseId}
-    </select>
-
-
-    <update id="updateCourseStateAndStartDate">
-        UPDATE courses
-        SET Course_state = #{newState}, Start_Date = NOW()
-        WHERE Course_id = #{courseId}
-    </update>
 
 </mapper>

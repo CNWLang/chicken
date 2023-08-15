@@ -20,9 +20,9 @@ public class UserController {
     public ResponseEntity<LoginResponse> login(@RequestBody User user) {
         User loggedInUser = userService.login(user.getUsername(), user.getPassword());
         if (loggedInUser != null) {
-            return ResponseEntity.ok(new LoginResponse(true,loggedInUser.isStudent()));
+            return ResponseEntity.ok(new LoginResponse(true,loggedInUser.isStudent(),loggedInUser.getEmail()));
         }else {
-            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(new LoginResponse(false,false));
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(new LoginResponse(false,false,null));
         }
     }
 
@@ -33,6 +33,16 @@ public class UserController {
             return ResponseEntity.ok(new RegisterResponse(true));
         }else {
             return ResponseEntity.status(HttpStatus.CONFLICT).body(new RegisterResponse(false));
+        }
+    }
+
+    //用户状态
+    @PostMapping("/state")
+    public boolean state(@RequestBody User user) {
+        if (userService.state(user.getEmail())){
+            return true;
+        }else {
+            return false;
         }
     }
 
@@ -47,12 +57,6 @@ public class UserController {
         }
     }
 
-    //反转在线状态
-    @GetMapping("/re-online")
-    public boolean reverseOnline(@RequestParam String email){
-        if(userService.reverseOnline(email)){
-            return true;
-        }
-        return false;
-    }
+
+
 }

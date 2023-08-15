@@ -1,20 +1,14 @@
 package com.example.chicken.rs.mapper;
 
-import org.apache.ibatis.annotations.Mapper;
-
 import com.example.chicken.rs.entity.Course;
+import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
-import java.util.Map;
 
 @Mapper
-
 public interface CourseMapper {
     List<Course> findCourseList();
+    List<Course> findCoursesByIds(@Param("course_id") List<Integer> courseIds);
 
-    List<Course> findCourseListByState(int courseState);
-
-    Course getCourseById(Long courseId);
-
-    void updateCourseStateAndStartDate(Map<String, Object> params);
 }

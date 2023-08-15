@@ -15,12 +15,13 @@
         <result column="reg_time" property="regTime" />
         <result column="true_name" property="trueName" />
         <result column="username" property="username" />
+        <result column="position" property="position" />
     </resultMap>
 
     <!-- 插入用户 -->
     <insert id="insertUser" parameterType="com.example.chicken.rs.entity.User">
-        INSERT INTO users (action_time, actions, address_city, address_province, email, is_student, online, password, reg_time, true_name, username)
-        VALUES (#{actionTime}, #{actions}, #{addressCity}, #{addressProvince}, #{email}, #{student}, #{online}, #{password}, #{regTime}, #{trueName}, #{username})
+        INSERT INTO users (action_time, actions, address_city, address_province, email, is_student, online, password, reg_time, true_name, username, position )
+        VALUES (#{actionTime}, #{actions}, #{addressCity}, #{addressProvince}, #{email}, #{student}, #{online}, #{password}, #{regTime}, #{trueName}, #{username}, #{position})
     </insert>
 
     <!-- 根据用户名查询用户 -->
@@ -28,9 +29,15 @@
         SELECT * FROM users WHERE username = #{student}
     </select>
 
-    <!-- 根据邮箱反转online状态  -->
-    <select id="reverseEmail" resultMap="BaseResultMap">
-        UPDATE users set online = 1 - online WHERE email = #{email}
+    <!-- 根据邮箱查询用户 -->
+    <select id="findByUserEmail" resultMap="BaseResultMap">
+        SELECT * FROM users WHERE email = #{email}
     </select>
+
+    <!-- 根据邮箱将在线状态置为true   -->
+    <update id="onEmail" parameterType="com.example.chicken.rs.entity.User">
+        UPDATE users SET online = 1 WHERE email = #{email}
+    </update>
+
     <!-- 其他的 CRUD 操作，如 update, delete 等可以根据需要继续添加 -->
 </mapper>

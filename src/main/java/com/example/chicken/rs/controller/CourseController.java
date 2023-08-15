@@ -2,11 +2,15 @@ package com.example.chicken.rs.controller;
 
 
 import com.example.chicken.rs.entity.Course;
+import com.example.chicken.rs.entity.User;
+import com.example.chicken.rs.entity.UserCourse;
 import com.example.chicken.rs.service.CourseService;
-import com.github.pagehelper.PageInfo;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.*;
+import com.example.chicken.rs.service.UserCourseService;
 import com.example.chicken.rs.util.Result;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -17,26 +21,39 @@ public class CourseController {
     @Autowired
     CourseService CourseService;
 
+    @Autowired
+    UserCourseService userCourseService;
+
+    //查询课程列表
     @GetMapping("/findCourseList")
-    public Result CourseList() {
+    public ResponseEntity<Result> CourseList() {
         List<Course> CourseList = CourseService.findCourseList();
-        PageInfo pageInfo = new PageInfo(CourseList);
-        return Result.success(pageInfo, "成功查询");
+        if (CourseList != null) {
+            return ResponseEntity.ok(Result.success(CourseList, "成功查询"));
+        } else {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(Result.error("服务器内部错误"));
+        }
     }
 
-    @GetMapping("/Courses")
-    public List<Course> getCourses(@RequestParam int CourseState) {
-        return CourseService.findCourseListByState(CourseState);
+    //学生选课
+    @PostMapping("/enroll")
+    public boolean enrollUserInCourse(@RequestBody UserCourse userCourse) {
+        if (CourseService.enrollUserCourse(userCourse)){
+            return true;
+        }else {
+            return false;
+        }
+
     }
 
-    @GetMapping("/Course/{CourseId}")
-    public Course getCourseDetails(@PathVariable Long CourseId) {
-        return CourseService.getCourseDetailsById(CourseId);
+    //查询特定学生已选课程
+    @GetMapping("/enrolledCourses")
+    public ResponseEntity<Result> getCoursesForStudent(@RequestBody User user) {
+        List<Course> CourseList = CourseService.getCoursesForStudent(user.getEmail());
+        if (CourseList != null) {
+            return ResponseEntity.ok(Result.success(CourseList, "成功查询"));
+        } else {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(Result.error("服务器内部错误"));
+        }
     }
-
-    @PostMapping("/updateCourse")
-    public void updateCourse(@RequestParam Long CourseId, @RequestParam int newState) {
-        CourseService.updateCourseStateAndStartDate(CourseId, newState);
-    }
-
 }

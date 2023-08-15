@@ -3,9 +3,9 @@ package com.example.chicken.rs.service;
 import com.example.chicken.rs.entity.User;
 import com.example.chicken.rs.mapper.UserMapper;
 import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.apache.logging.log4j.Logger;
 
 @Service
 public class UserService {
@@ -17,6 +17,7 @@ public class UserService {
         try {
             User user = userMapper.findByUsername(username);
             if (user != null && user.getPassword().equals(password)) {
+                userMapper.onEmail(user.getEmail());
                 return user;
             }else {
                 return null;
@@ -37,6 +38,20 @@ public class UserService {
         }
     }
 
+    public boolean state(String email){
+        try {
+            User user = userMapper.findByUserEmail(email);
+            if (user!=null){
+                return user.isOnline();
+            }else{
+                return false;
+            }
+        }catch (Exception ex){
+            logger.error(ex);
+            return false;
+        }
+    }
+
     public User examine(String username){
         try {
             User user = userMapper.findByUsername(username);
@@ -48,14 +63,5 @@ public class UserService {
 
     }
 
-    public  boolean reverseOnline(String email){
-        try {
-            int affectedRows = userMapper.reverseEmail(email);
-            return affectedRows>0;
-        }catch (Exception ex){
-            logger.error(ex);
-            return false;
-        }
-    }
 
 }

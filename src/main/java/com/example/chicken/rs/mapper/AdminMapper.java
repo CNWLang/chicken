@@ -8,4 +8,7 @@ import java.util.List;
 @Mapper
 public interface AdminMapper {
     List<User> findStudentList();
+    int offEmail(String email);
+    int deleteUserByEmail(String email);
+    List<User> getUserByEmail(String email);
 }

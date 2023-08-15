@@ -22,5 +22,5 @@ public class User {
     private String regTime;
     private String trueName;
     private String username;
-
+    private String position;
 }
