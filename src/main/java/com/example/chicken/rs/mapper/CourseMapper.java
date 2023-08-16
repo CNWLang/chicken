@@ -10,5 +10,5 @@ import java.util.List;
 public interface CourseMapper {
     List<Course> findCourseList();
     List<Course> findCoursesByIds(@Param("course_id") List<Integer> courseIds);
-
+    int insertCourse(Course course);
 }

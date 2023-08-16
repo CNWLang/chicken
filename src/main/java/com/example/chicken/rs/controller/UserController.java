@@ -20,9 +20,9 @@ public class UserController {
     public ResponseEntity<LoginResponse> login(@RequestBody User user) {
         User loggedInUser = userService.login(user.getUsername(), user.getPassword());
         if (loggedInUser != null) {
-            return ResponseEntity.ok(new LoginResponse(true,loggedInUser.isStudent(),loggedInUser.getEmail()));
+            return ResponseEntity.ok(new LoginResponse(true,loggedInUser.isStudent(),loggedInUser.getEmail(),loggedInUser.getId()));
         }else {
-            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(new LoginResponse(false,false,null));
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(new LoginResponse(false,false,null,0));
         }
     }
 
@@ -57,6 +57,21 @@ public class UserController {
         }
     }
 
+    @PostMapping("/moodType")
+    public boolean InsertMood(@RequestParam String email,@RequestParam String words,@RequestParam int moodType){
+        String mood = userService.findMoodByMoodType(moodType);
+        try {
+            boolean result = userService.insertWordsMood(email,words,mood);
+            if(result){
+                return true;
+            }
+            else{
+                return false;
+            }
+        }catch (Exception e){
+            return false;
+        }
 
+    }
 
 }

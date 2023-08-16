@@ -54,4 +54,14 @@ public class CourseService {
          }
     }
 
+    public boolean addCourse(Course course) {
+        try {
+            int rowsAffected = CourseMapper.insertCourse(course);
+            return rowsAffected > 0;
+        }catch (Exception exception){
+            logger.error(exception);
+            return false;
+        }
+    }
+
 }

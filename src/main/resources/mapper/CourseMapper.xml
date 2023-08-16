@@ -27,6 +27,12 @@
         </foreach>
     </select>
 
-
+    <!-- 添加课程信息   -->
+    <insert id="insertCourse" parameterType="com.example.chicken.rs.entity.Course">
+        INSERT INTO course (course_no, course_name ,start_date, end_date, course_state,
+                            course_money, course_teacher_phone, course_teacher)
+        VALUES (#{course_no}, #{course_name}, #{start_date}, #{end_date}, #{course_state},
+                #{course_money}, #{course_teacher_phone}, #{course_teacher})
+    </insert>
 
 </mapper>

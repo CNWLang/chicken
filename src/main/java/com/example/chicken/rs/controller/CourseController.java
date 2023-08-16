@@ -56,4 +56,15 @@ public class CourseController {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(Result.error("服务器内部错误"));
         }
     }
+
+    //添加课程
+    @PostMapping("/add-course")
+    public boolean addCourse(@RequestBody Course course) {
+        if (CourseService.addCourse(course)){
+            return true;
+        }else {
+            return false;
+        }
+    }
+
 }

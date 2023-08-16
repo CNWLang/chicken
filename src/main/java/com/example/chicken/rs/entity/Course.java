@@ -11,6 +11,7 @@ public class Course {
     @Column(name = "id", nullable = false)
     private int id;//课程id
     private String course_no; //课程号
+    private String course_name;
     //@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private String start_date; //课程开始日期
     //@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")

@@ -39,5 +39,12 @@
         UPDATE users SET online = 1 WHERE email = #{email}
     </update>
 
+    <select id="findMoodByMoodType" resultType="string" parameterType="int">
+        SELECT mood FROM mood WHERE id = #{id}
+    </select>
+    <insert id="insertWordsMood" parameterType="string">
+        INSERT INTO user_mood (user_email,words,mood)
+        VALUES (#{email}, #{words}, #{mood})
+    </insert>
     <!-- 其他的 CRUD 操作，如 update, delete 等可以根据需要继续添加 -->
 </mapper>

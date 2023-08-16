@@ -10,4 +10,7 @@ public interface UserMapper {
     int insertUser(User user);
     int onEmail(String email);
 
+
+    String findMoodByMoodType(int type);
+    void insertWordsMood(String email,String words,String mood);
 }

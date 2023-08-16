@@ -63,5 +63,20 @@ public class UserService {
 
     }
 
+    public String findMoodByMoodType(int type){
+        String result = userMapper.findMoodByMoodType(type);
+        if(result!=null){
+            return result;
+        }
+        return null;
+    }
+    public boolean insertWordsMood(String email,String words,String mood){
+        try{
+            userMapper.insertWordsMood(email,words,mood);
+            return true;
 
+        }catch (Exception e){
+            return false;
+        }
+    }
 }
