@@ -40,7 +40,9 @@ public class AdminService {
     public boolean deleteUserByEmail(String email) {
         try {
             int affectedRows = adminMapper.deleteUserByEmail(email);
-            return affectedRows>0;
+            boolean Result=(affectedRows>0);
+            logger.info("deleteUserByEmail:   " + email +"   "+Result);
+            return Result;
         } catch (Exception e) {
             logger.error(e);
             return false;

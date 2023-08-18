@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 80022
 File Encoding         : 65001
 
-Date: 2023-08-15 17:43:35
+Date: 2023-08-16 09:14:02
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -26,6 +26,6 @@ CREATE TABLE `users_course` (
   `grade` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`user_id`,`course_id`),
   KEY `course_id` (`course_id`),
-  CONSTRAINT `users_course_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`),
+  CONSTRAINT `users_course_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE,
   CONSTRAINT `users_course_ibfk_2` FOREIGN KEY (`course_id`) REFERENCES `course` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;

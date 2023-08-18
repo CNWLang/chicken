@@ -23,4 +23,6 @@ public class User {
     private String trueName;
     private String username;
     private String position;
+    private int moodType;
+    private String comments;
 }

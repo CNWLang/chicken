@@ -58,10 +58,9 @@ public class UserController {
     }
 
     @PostMapping("/moodType")
-    public boolean InsertMood(@RequestParam String email,@RequestParam String words,@RequestParam int moodType){
-        String mood = userService.findMoodByMoodType(moodType);
+    public boolean updateMoodType(@RequestBody user_mood u){
         try {
-            boolean result = userService.insertWordsMood(email,words,mood);
+            boolean result = userService.updateWordsMood(u.getUser_email(),u.getWords(),u.getMoodType());
             if(result){
                 return true;
             }
